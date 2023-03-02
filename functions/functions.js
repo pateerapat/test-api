@@ -18,31 +18,17 @@ module.exports = {
         return false
     },
     getMongooseType: (type, isRequired = false) => {
-        if (type == 'String') {
-            return {
-                type: String,
-                required: isRequired,
-            }
-        } else if (type == 'Number') {
-            return {
-                type: Number,
-                required: isRequired,
-            }
-        } else if (type == 'Array') {
-            return {
-                type: Array,
-                required: isRequired,
-            }
-        } else if (type == 'Boolean') {
-            return {
-                type: Boolean,
-                required: isRequired,
-            }
-        } else {
-            return {
-                type: String,
-                required: isRequired,
-            }
+        const CONSTRUCTOR_TYPE = {
+            "String":   String,
+            "Number":   Number,
+            "Boolean":  Boolean,
+            "Object":   Object,
+            "Array":    Array,
+        }
+        let selectedType = CONSTRUCTOR_TYPE[type]
+        return {
+            type: selectedType,
+            required: isRequired,
         }
     },
     successValidator: (response, successMessage = '', failMessage = '') => {

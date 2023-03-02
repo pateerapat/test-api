@@ -1,11 +1,11 @@
 const connect = require('./connect')
 
 
-const Schema = require('../schemas/activity_schema')
+const Schema = require('../schemas/user_schema')
 
 
 module.exports = {
-    insertActivityQuery: async (data) => {
+    insertUserQuery: async (data) => {
         return connect().then(async (mongoose) => {
             let response = {
                 success: false,
@@ -23,7 +23,7 @@ module.exports = {
             }
         })
     },
-    getActivityQueryById: async (id) => {
+    getUserQueryById: async (id) => {
         return connect().then(async (mongoose) => {
             let response = {
                 success: false,
@@ -44,7 +44,28 @@ module.exports = {
             }
         })
     },
-    getAllActivityQuery: async () => {
+    getUserFilterByQuery: async (query) => {
+        return connect().then(async (mongoose) => {
+            let response = {
+                success: false,
+                payload: {},
+            }
+            try {
+                let dataResult = await Schema.find(
+                    query,
+                    '-__v',
+                )
+                response.payload.data = dataResult
+                response.success = true
+            } catch (err) {
+                response.success = false
+            } finally {
+                mongoose.connection.close()
+                return response
+            }
+        })
+    },
+    getAllUserQuery: async () => {
         return connect().then(async (mongoose) => {
             let response = {
                 success: false,
@@ -65,7 +86,7 @@ module.exports = {
             }
         })
     },
-    deleteActivityQueryById: async (id) => {
+    deleteUserQueryById: async (id) => {
         return connect().then(async (mongoose) => {
             let response = {
                 success: false,
@@ -83,7 +104,7 @@ module.exports = {
             }
         })
     },
-    updateActivityQueryById: async (id, data) => {
+    updateUserQueryById: async (id, data) => {
         return connect().then(async (mongoose) => {
             let response = {
                 success: false,

@@ -15,6 +15,7 @@ app.use(bodyparser.urlencoded({ extended: false }))
 
 
 const routeActivity = require('./routes/activity_route')
+const routeUser = require('./routes/user_route')
 
 
 app.get('/', (req, res) => {
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/activity', routeActivity)
+app.use('/user', routeUser)
 
 
 app.use((req, res, next) => {

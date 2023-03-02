@@ -6,11 +6,16 @@ const {
     updateActivityQueryById,
 } = require('../core/activity_query')
 const { successValidator } = require('../functions/functions')
+const { updateUserOwnedActivityById } = require('./user_model')
 
 module.exports = {
     insertActivity: async (data) => {
         try {
             let response = await insertActivityQuery(data)
+            if (response.success) {
+                const activity = response.payload.data
+                updateUserOwnedActivityById(data.owner._id, activity)
+            }
             return successValidator(
                 response,
                 'Insert successful.',

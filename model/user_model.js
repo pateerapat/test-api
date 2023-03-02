@@ -201,10 +201,33 @@ async function getUserById(id) {
 }
 
 
+async function updateUserOwnedActivityById(id, activity) {
+    try {
+        let responseGet = await getUserQueryById(id)
+        const userOwnedActivity = responseGet.payload.data[0].owned_activity
+        userOwnedActivity.push(activity)
+        let responseUpdate = await updateUserQueryById(
+            id,
+            {
+                owned_activity: userOwnedActivity,
+            }
+        )
+        return successValidator(
+            responseUpdate,
+            'Get data successful.',
+            'Failed to get data.',
+        )
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
 module.exports = {
     register,
     googleAuth,
     getAllUser,
     login,
     getUserById,
+    updateUserOwnedActivityById,
 }

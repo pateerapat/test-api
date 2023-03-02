@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator")
+const { validationResult } = require('express-validator')
 
 function apiValidation(req, res, next) {
   const errors = validationResult(req)
@@ -8,7 +8,7 @@ function apiValidation(req, res, next) {
       success: false,
       error: {
         errorCode: 400,
-        message: "The request body has " + errors.array().length + " error(s)",
+        message: `The request body has ${errors.array().length} error(s)`,
       },
     })
   }

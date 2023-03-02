@@ -30,7 +30,10 @@ module.exports = {
                 payload: {},
             }
             try {
-                let dataResult = await activitySchema.findOne({_id: id})
+                let dataResult = await activitySchema.findOne(
+                    {_id: id},
+                    '-__v',
+                )
                 response.payload.data = [dataResult]
                 response.success = true
             } catch (err) {
@@ -48,7 +51,10 @@ module.exports = {
                 payload: {},
             }
             try {
-                let dataResult = await activitySchema.find({})
+                let dataResult = await activitySchema.find(
+                    {},
+                    '-__v',
+                )
                 response.payload.data = dataResult
                 response.success = true
             } catch (err) {
@@ -85,7 +91,10 @@ module.exports = {
             }
             try {
                 let dataResult = await activitySchema.findOneAndUpdate({_id: id}, data)
-                let findResult = await activitySchema.findOne({_id: id})
+                let findResult = await activitySchema.findOne(
+                    {_id: id},
+                    '-__v',
+                )
                 response.payload.old_data = dataResult
                 response.payload.new_data = findResult
                 response.success = true

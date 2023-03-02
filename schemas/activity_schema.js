@@ -4,7 +4,7 @@ const { getMongooseType } = require('../functions/functions')
 
 const activitySchema = mongoose.Schema({
     district:               getMongooseType('String', true),
-    activity_type:          getMongooseType('String', true),
+    activity_type:          getMongooseType('Array', true),
     is_use_to_activity:     getMongooseType('Boolean', true),
     activity_name:          getMongooseType('String', true),
     activity_detail:        getMongooseType('String', true),
@@ -20,6 +20,12 @@ const activitySchema = mongoose.Schema({
     participation_limit:    getMongooseType('Number', true),
     activity_price:         getMongooseType('Number', true),
     status:                 getMongooseType('String', true),
+},
+{
+    timestamps: {
+        createdAt: 'created',
+        updatedAt: 'updated_at',
+    },
 })
 
 
